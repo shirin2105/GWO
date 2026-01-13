@@ -1,76 +1,78 @@
-# GWO - Tổng hợp bài tập/đồ án
+# GWO – Project Collection
 
-Repo này gồm 2 phần độc lập:
+This repository contains two independent sub-projects:
 
-1) **CNN-Handwritten_Digit**: Nhận diện chữ số viết tay bằng CNN, có phiên bản cơ bản và phiên bản tối ưu hyperparameters bằng **Grey Wolf Optimization (GWO)**.
-2) **Digital_Signal_Processing-JCAS_Multibeam**: Tối ưu đa chùm tia (multibeam) cho **Joint Communication and Sensing (JCAS)** trong MATLAB.
+1) **CNN-Handwritten_Digit**: Handwritten digit recognition using a CNN, including a baseline run and a variant that uses **Grey Wolf Optimization (GWO)** to tune hyperparameters.
+2) **Digital_Signal_Processing-JCAS_Multibeam**: MATLAB implementation for multibeam optimization for **Joint Communication and Sensing (JCAS)**.
 
-## Cấu trúc thư mục
+## Repository Structure
 
 - [CNN-Handwritten_Digit](CNN-Handwritten_Digit)
-  - `cnn_basic.py`: CNN cơ bản (hyperparameters khởi tạo ngẫu nhiên hoặc chỉ định)
-  - `cnn_gwo.py`: CNN + GWO tối ưu `learning_rate` và `num_filters`
-  - `compare_methods.py`: Chạy và so sánh 2 phương pháp
-  - `requirements.txt`: Phụ thuộc Python
+  - `cnn_basic.py`: baseline CNN (random or user-specified hyperparameters)
+  - `cnn_gwo.py`: CNN + GWO tuning for `learning_rate` and `num_filters`
+  - `compare_methods.py`: runs and compares baseline vs GWO-tuned CNN
+  - `requirements.txt`: Python dependencies
 
 - [Digital_Signal_Processing-JCAS_Multibeam](Digital_Signal_Processing-JCAS_Multibeam)
-  - `main.m`: Ví dụ chạy tạo beam/multibeam
-  - `main_comparison.m`: So sánh các thuật toán (ILS, GWO, IGWO, ChaoticGWO, ...)
-  - Các hàm hỗ trợ: `twoStepILS.m`, `GWO.m`, `IGWO.m`, `ChaoticGWO.m`, ...
+  - `main.m`: example script for generating/visualizing beams
+  - `main_comparison.m`: benchmarking script comparing algorithms (Two-Step ILS, GWO, IGWO, ChaoticGWO, ...)
+  - Supporting functions: `twoStepILS.m`, `GWO.m`, `IGWO.m`, `ChaoticGWO.m`, etc.
 
 ## 1) CNN-Handwritten_Digit (Python)
 
-### Yêu cầu
+### Requirements
 
 - Python 3.x
-- Cài dependencies:
+- Install dependencies:
 
-  - `pip install -r CNN-Handwritten_Digit/requirements.txt`
+```
+pip install -r CNN-Handwritten_Digit/requirements.txt
+```
 
-### Dữ liệu
+### Dataset layout
 
-Code đang đọc dữ liệu từ thư mục `archive` theo cấu trúc sau (mỗi class là 1 thư mục):
+The scripts expect an `archive` folder structured by class label:
 
 ```
 CNN-Handwritten_Digit/
   archive/
-    0/  (các ảnh .jpg)
+    0/  (jpg images)
     1/
     ...
     9/
 ```
 
-Mặc định các ảnh sẽ được đọc dạng grayscale và resize về `28x28`.
+Images are loaded as grayscale and resized to `28x28`.
 
-### Chạy so sánh (khuyến nghị)
+### Run the comparison
 
-Chạy script so sánh 2 phương pháp (CNN random hyperparams vs CNN+GWO):
+Run the baseline CNN vs the GWO-tuned CNN:
 
 ```
 python CNN-Handwritten_Digit/compare_methods.py
 ```
 
-Kết quả sẽ tạo các file output như `comparison_results.json`, các hình `results_*.png`, và model `.h5` (tùy theo script).
+The scripts generate outputs such as `comparison_results.json`, plots (`results_*.png`), and saved models (`.h5`) depending on the run.
 
 ## 2) Digital_Signal_Processing-JCAS_Multibeam (MATLAB)
 
-### Chạy nhanh
+### Quick start
 
-Mở MATLAB, chuyển working directory sang thư mục:
+Open MATLAB and set the working directory to:
 
 - [Digital_Signal_Processing-JCAS_Multibeam](Digital_Signal_Processing-JCAS_Multibeam)
 
-Sau đó chạy một trong các file:
+Then run one of the following scripts:
 
-- `main.m`: tạo beam/multibeam minh họa
-- `main_comparison.m`: chạy và so sánh nhiều thuật toán tối ưu (ILS/GWO/IGWO/ChaoticGWO, ...)
+- `main.m`: beam / multibeam generation demo
+- `main_comparison.m`: runs and compares multiple optimization algorithms
 
-### Ghi chú
+### Source / attribution
 
-Trong thư mục này có README tiếng Anh với mô tả ngắn và liên kết tham khảo:
+The JCAS multibeam part and the Two-Step ILS-based workflow are adapted from (and inspired by) the public repository:
+
+- https://github.com/RostyslavUA/jcas_multibeam_optimization
+
+See the subfolder README for additional context and references:
 
 - [Digital_Signal_Processing-JCAS_Multibeam/README.md](Digital_Signal_Processing-JCAS_Multibeam/README.md)
-
-## Ghi chú repo
-
-- File báo cáo LaTeX `bao-cao.tex` được **loại khỏi Git** (không upload) theo yêu cầu.
